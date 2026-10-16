@@ -1,0 +1,1139 @@
+/* ==========================================================================
+   Coursera Certificate Page - Pixel Exact Stylesheet
+   Matching exact colors, typography, spacing, padding, margins and layout
+   ========================================================================== */
+
+:root {
+  --font-primary: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: 'EB Garamond', Georgia, serif;
+  --font-signature: 'Caveat', cursive;
+
+  /* Coursera Brand Colors */
+  --color-coursera-blue: #0056D2;
+  --color-coursera-blue-hover: #00419e;
+  --color-duke-navy: #001A57;
+  --color-text-dark: #1f1f1f;
+  --color-text-medium: #2a2b2c;
+  --color-text-muted: #595959;
+  --color-text-light: #636363;
+  --color-border: #dcdfe1;
+  --color-border-subtle: #e0e0e0;
+  --color-bg-light-blue: #f1f6fa;
+  --color-bg-pill: #ebf3ff;
+  --color-check-green: #0e7a3b;
+  --color-star-gold: #d96500;
+  --color-footer-bg: #f5f5f5;
+
+  /* Layout Widths */
+  --content-max-width: 1180px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-primary);
+  color: var(--color-text-dark);
+  background-color: #ffffff;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   1. Top Audience Selector Bar (Black)
+   ========================================================================== */
+.top-nav-bar {
+  background-color: #1f1f1f;
+  color: #ffffff;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 100;
+}
+
+.top-nav-container {
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.audience-tabs {
+  display: flex;
+  gap: 4px;
+  height: 40px;
+  align-items: stretch;
+}
+
+.audience-tab {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.1px;
+  position: relative;
+  transition: opacity 0.2s ease;
+  opacity: 0.9;
+}
+
+.audience-tab:hover {
+  opacity: 1;
+}
+
+.audience-tab.active {
+  opacity: 1;
+}
+
+.audience-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #ffffff;
+}
+
+/* ==========================================================================
+   2. Main Header & Search
+   ========================================================================== */
+.main-header {
+  height: 72px;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 90;
+}
+
+.header-container {
+  max-width: var(--content-max-width);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.coursera-logo-svg {
+  width: 134px;
+  height: auto;
+  display: block;
+}
+
+/* Explore Dropdown */
+.explore-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.explore-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  padding: 8px 12px;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  user-select: none;
+}
+
+.explore-btn:hover,
+.explore-btn[aria-expanded="true"],
+.explore-dropdown-wrapper.open .explore-btn {
+  background-color: #f1f3f5;
+  color: var(--color-coursera-blue);
+}
+
+.chevron-icon {
+  transition: transform 0.2s ease;
+}
+
+.explore-btn[aria-expanded="true"] .chevron-icon,
+.explore-dropdown-wrapper.open .chevron-icon {
+  transform: rotate(180deg);
+}
+
+.explore-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 440px;
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+  border-radius: 8px;
+  padding: 16px;
+  display: none;
+  z-index: 1100;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+}
+
+.explore-menu.show,
+.explore-dropdown-wrapper.open .explore-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.explore-menu-columns {
+  display: grid;
+  grid-template-columns: 180px 220px;
+  gap: 16px;
+}
+
+.explore-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.explore-col-goals {
+  border-right: 1px solid var(--color-border-subtle);
+  padding-right: 14px;
+}
+
+.explore-section-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--color-text-light);
+  margin-bottom: 8px;
+  padding-left: 8px;
+}
+
+.explore-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-radius: 4px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.explore-item:hover {
+  background-color: #f1f6fa;
+  color: var(--color-coursera-blue);
+}
+
+.explore-item-text {
+  line-height: 1.3;
+}
+
+.explore-item-arrow {
+  color: #a0aec0;
+  font-size: 15px;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.explore-item:hover .explore-item-arrow {
+  color: var(--color-coursera-blue);
+  transform: translateX(3px);
+}
+
+.degrees-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.degrees-link:hover {
+  color: var(--color-coursera-blue);
+}
+
+/* Header Search */
+.header-search {
+  flex: 1;
+  max-width: 460px;
+}
+
+.search-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 44px;
+  border: 1px solid #757575;
+  border-radius: 24px;
+  padding: 2px 5px 2px 20px;
+  background: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-form:focus-within {
+  border-color: var(--color-coursera-blue);
+  box-shadow: 0 0 0 2px rgba(0, 86, 210, 0.2);
+}
+
+.search-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: var(--color-text-dark);
+  background: transparent;
+}
+
+.search-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.search-submit-btn {
+  width: 34px;
+  height: 34px;
+  background-color: var(--color-coursera-blue);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease;
+}
+
+.search-submit-btn:hover {
+  background-color: var(--color-coursera-blue-hover);
+}
+
+/* Header Right Auth */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.login-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-coursera-blue);
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+.btn-join-free {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-coursera-blue);
+  border: 1px solid var(--color-coursera-blue);
+  border-radius: 4px;
+  padding: 8px 18px;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.btn-join-free:hover {
+  background-color: var(--color-coursera-blue);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   3. Main Page Container
+   ========================================================================== */
+.page-container {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 24px 24px 80px 24px;
+}
+
+/* ==========================================================================
+   4. Section 1: Hero Verification & Certificate
+   ========================================================================== */
+.certificate-hero-section {
+  margin-bottom: 48px;
+}
+
+.breadcrumb-tag {
+  font-size: 13.5px;
+  color: var(--color-text-light);
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+
+.hero-title {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  line-height: 1.25;
+  margin-bottom: 28px;
+  letter-spacing: -0.3px;
+}
+
+.hero-content-grid {
+  display: flex;
+  gap: 36px;
+  align-items: stretch;
+}
+
+/* Left Verification Card */
+.verification-card {
+  flex: 0 0 420px;
+  background-color: var(--color-bg-light-blue);
+  border-radius: 8px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.avatar-wrapper {
+  margin-bottom: 20px;
+}
+
+.avatar-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #d1dde8;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.person-icon {
+  width: 44px;
+  height: 44px;
+  transform: translateY(2px);
+}
+
+.verified-check-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 20px;
+  height: 20px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+}
+
+.recipient-heading {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: 4px;
+}
+
+.completion-date {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: 12px;
+}
+
+.study-duration {
+  font-size: 14px;
+  color: var(--color-text-medium);
+  margin-bottom: 22px;
+  line-height: 1.4;
+}
+
+.verification-statement {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-text-medium);
+  margin-bottom: 26px;
+}
+
+.course-inline-link {
+  color: var(--color-text-dark);
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.course-inline-link:hover {
+  color: var(--color-coursera-blue);
+}
+
+.completed-courses-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: 12px;
+}
+
+.completed-courses-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.completed-courses-list li {
+  font-size: 14px;
+  color: var(--color-text-dark);
+  line-height: 1.45;
+}
+
+.course-list-link,
+.course-cert-title-link,
+.institution-link,
+.offered-by-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.course-list-link:hover,
+.course-cert-title-link:hover,
+.institution-link:hover,
+.offered-by-link:hover {
+  color: var(--color-coursera-blue);
+  text-decoration: underline;
+}
+
+/* Right Certificate Preview Card */
+.certificate-preview-wrapper {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+}
+
+.certificate-document-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #dce2e8;
+  border-radius: 6px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.certificate-document-card:hover {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+}
+
+.certificate-image-wrap {
+  width: 100%;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: zoom-in;
+  overflow: hidden;
+}
+
+.certificate-image-render {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.certificate-image-wrap:hover .certificate-image-render {
+  transform: scale(1.015);
+}
+
+.certificate-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 12px 18px;
+  background-color: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.btn-cert-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-coursera-blue);
+  background-color: #ffffff;
+  border: 1px solid #d0d7de;
+  border-radius: 4px;
+  padding: 7px 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-cert-action:hover {
+  background-color: var(--color-coursera-blue);
+  color: #ffffff;
+  border-color: var(--color-coursera-blue);
+}
+
+/* Lightbox Modal */
+.cert-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.cert-modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cert-modal-dialog {
+  position: relative;
+  max-width: 95vw;
+  max-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
+
+.cert-modal-image {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.cert-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  z-index: 1010;
+}
+
+.cert-modal-close:hover {
+  background-color: #000000;
+  transform: scale(1.1);
+}
+
+/* ==========================================================================
+   5. Section 2: Specialization Overview & Enroll Row
+   ========================================================================== */
+.specialization-overview-section {
+  margin-top: 48px;
+  padding-top: 36px;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.course-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+.duke-square-badge {
+  width: 76px;
+  height: 76px;
+  background-color: var(--color-duke-navy);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.duke-badge-title {
+  font-family: var(--font-serif);
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.duke-badge-sub {
+  font-family: var(--font-primary);
+  color: #ffffff;
+  font-size: 6.5px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.course-header-info {
+  flex: 1;
+}
+
+.course-main-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.course-main-title a {
+  color: var(--color-text-dark);
+  text-decoration: underline;
+  transition: color 0.15s ease;
+}
+
+.course-main-title a:hover {
+  color: var(--color-coursera-blue);
+}
+
+.offered-by-text {
+  font-size: 14.5px;
+  color: var(--color-text-dark);
+  margin-bottom: 8px;
+}
+
+.rating-and-enrollment {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--color-text-dark);
+}
+
+.star-rating {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.star-icon {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.star-icon.filled {
+  color: var(--color-star-gold);
+}
+
+.star-icon.empty {
+  color: var(--color-star-gold);
+}
+
+.rating-score {
+  font-size: 14px;
+  color: var(--color-text-dark);
+  font-weight: 500;
+}
+
+.pipe-divider {
+  color: #8c8c8c;
+  margin: 0 4px;
+}
+
+.enrollment-count {
+  font-size: 14px;
+  color: var(--color-text-dark);
+}
+
+.enroll-action-col {
+  flex-shrink: 0;
+}
+
+.btn-enroll-primary {
+  background-color: var(--color-coursera-blue);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 13px 30px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-enroll-primary:hover {
+  background-color: var(--color-coursera-blue-hover);
+}
+
+.btn-enroll-primary:active {
+  transform: scale(0.99);
+}
+
+/* What you will learn */
+.learning-outcomes-section {
+  margin-bottom: 36px;
+}
+
+.section-subheading {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: 18px;
+}
+
+.outcomes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 48px;
+}
+
+.outcome-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.check-icon {
+  color: var(--color-check-green);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.outcome-item p {
+  font-size: 14px;
+  line-height: 1.48;
+  color: var(--color-text-dark);
+}
+
+/* Skills you will gain */
+.skills-section {
+  margin-bottom: 24px;
+}
+
+.skills-pill-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skill-pill {
+  background-color: var(--color-bg-pill);
+  color: var(--color-text-dark);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 16px;
+  display: inline-block;
+  transition: background-color 0.15s ease;
+}
+
+.skill-pill:hover {
+  background-color: #dceafc;
+}
+
+/* ==========================================================================
+   6. Section 3: Course Certificates List
+   ========================================================================== */
+.course-certificates-section {
+  margin-top: 56px;
+}
+
+.certificates-list-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: 6px;
+  letter-spacing: -0.2px;
+}
+
+.certificates-list-subtitle {
+  font-size: 14px;
+  color: var(--color-text-light);
+  margin-bottom: 40px;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.courses-timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.course-cert-card {
+  margin-bottom: 48px;
+}
+
+.course-cert-title {
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin-bottom: 12px;
+  line-height: 1.25;
+}
+
+.course-institution {
+  font-size: 15px;
+  color: var(--color-text-dark);
+  margin-bottom: 8px;
+}
+
+.course-instructors {
+  font-size: 14px;
+  color: var(--color-text-dark);
+  margin-bottom: 8px;
+}
+
+.course-completion-meta {
+  font-size: 14px;
+  color: var(--color-text-dark);
+  margin-bottom: 8px;
+}
+
+.course-effort {
+  font-size: 14px;
+  color: var(--color-text-dark);
+  margin-bottom: 14px;
+}
+
+.view-cert-link {
+  color: var(--color-coursera-blue);
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.15s ease;
+}
+
+.view-cert-link:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   7. Section 4: Global Footer
+   ========================================================================== */
+.coursera-footer {
+  background-color: var(--color-footer-bg);
+  border-top: 1px solid var(--color-border-subtle);
+  padding: 56px 0 36px 0;
+}
+
+.footer-container {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.footer-directory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 36px;
+  margin-bottom: 48px;
+}
+
+.footer-col-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: 16px;
+}
+
+.footer-links-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links-list a {
+  font-size: 14px;
+  color: var(--color-text-dark);
+  transition: color 0.15s ease;
+}
+
+.footer-links-list a:hover {
+  color: var(--color-coursera-blue);
+  text-decoration: underline;
+}
+
+.footer-separator-line {
+  border-bottom: 1px solid var(--color-border-subtle);
+  margin-bottom: 40px;
+}
+
+.footer-sub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.3fr;
+  gap: 36px;
+  margin-bottom: 36px;
+}
+
+.footer-sub-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: 16px;
+}
+
+.footer-sub-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-sub-links a {
+  font-size: 14px;
+  color: var(--color-text-dark);
+  transition: color 0.15s ease;
+}
+
+.footer-sub-links a:hover {
+  color: var(--color-coursera-blue);
+  text-decoration: underline;
+}
+
+.footer-badges-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.store-badge {
+  background-color: #000000;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 16px;
+  border-radius: 6px;
+  height: 44px;
+  transition: opacity 0.2s ease;
+  min-width: 144px;
+}
+
+.store-badge:hover {
+  opacity: 0.85;
+}
+
+.badge-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.badge-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.badge-sub {
+  font-size: 9px;
+  letter-spacing: 0.4px;
+  color: #dddddd;
+}
+
+.badge-main {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.footer-bottom-bar {
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: 24px;
+  color: var(--color-text-light);
+  font-size: 13px;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .hero-content-grid {
+    flex-direction: column;
+  }
+  
+  .verification-card {
+    flex: none;
+    max-width: 100%;
+  }
+
+  .outcomes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-directory-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-sub-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .header-search {
+    display: none;
+  }
+
+  .audience-tabs {
+    overflow-x: auto;
+  }
+
+  .course-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-directory-grid,
+  .footer-sub-grid {
+    grid-template-columns: 1fr;
+  }
+}
